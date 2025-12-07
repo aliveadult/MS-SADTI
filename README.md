@@ -1,5 +1,3 @@
-📝 MS-SADTI Project README.md
-Markdown
 # MS-SADTI: Multi-Scale Structural Abstraction for Drug-Target Interaction Prediction
 <img width="2587" height="1528" alt="Visualization Transformer and Pharmacophore Hypernode" src="https://github.com/user-attachments/assets/176da699-f2d7-4ae1-b874-9793ee0bda15" />
 
@@ -100,6 +98,7 @@ python mains.py
 ✉ Citation and Contact
 Please cite the corresponding work if you find this model useful in your research:
 @article{}
+
 
 
 
