@@ -80,7 +80,7 @@ To set up the environment, run the following commands:
 conda env create -f requirements.yml 
 
 # 2. Activate the environment
-conda activate MssaDti 
+conda activate Mssa-Dti 
 If you encounter dependency issues, you may need to manually install the PyTorch Geometric dependencies or the necessary machine learning libraries (sklearn, pandas, tqdm, rdkit, biopython).
 Install ESM Model (Optional)
 If you need to regenerate protein sequence features, install the ESM libraries:
@@ -98,6 +98,7 @@ python mains.py
 ✉ Citation and Contact
 Please cite the corresponding work if you find this model useful in your research:
 @article{}
+
 
 
 
