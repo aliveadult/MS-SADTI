@@ -1,5 +1,3 @@
-﻿Certainly, here is the complete README.md file in English, incorporating all the details you provided regarding the MS-SADTI model and the evaluation datasets.
-
 📝 MS-SADTI Project README.md
 Markdown
 # MS-SADTI: Multi-Scale Structural Abstraction for Drug-Target Interaction Prediction
@@ -102,6 +100,7 @@ python mains.py
 ✉ Citation and Contact
 Please cite the corresponding work if you find this model useful in your research:
 @article{}
+
 
 
 
