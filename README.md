@@ -3,6 +3,8 @@
 📝 MS-SADTI Project README.md
 Markdown
 # MS-SADTI: Multi-Scale Structural Abstraction for Drug-Target Interaction Prediction
+[Visualization Transformer and Pharmacophore Hypernodes.pdf](https://github.com/user-attachments/files/24014341/Visualization.Transformer.and.Pharmacophore.Hypernodes.pdf)
+
 
 ## 💡 MS-SADTI Framework
 MS-SADTI (Multi-Scale Structural Abstraction for Drug-Target Interaction) is an innovative drug–target interaction (DTI) prediction model designed to overcome generalization limitations and enhance interpretability through advanced feature concatenation and hierarchical structural abstraction for both drugs and proteins.
@@ -81,7 +83,7 @@ To set up the environment, run the following commands:
 conda env create -f requirements.yml 
 
 # 2. Activate the environment
-conda activate mafi 
+conda activate MssaDti 
 If you encounter dependency issues, you may need to manually install the PyTorch Geometric dependencies or the necessary machine learning libraries (sklearn, pandas, tqdm, rdkit, biopython).
 Install ESM Model (Optional)
 If you need to regenerate protein sequence features, install the ESM libraries:
@@ -99,4 +101,5 @@ python mains.py
 ✉ Citation and Contact
 Please cite the corresponding work if you find this model useful in your research:
 @article{}
+
 
