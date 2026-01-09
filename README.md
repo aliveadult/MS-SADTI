@@ -35,7 +35,7 @@ The project structure is organized around feature extraction, model definition, 
 
 ## 📁 Dataset
 
-To comprehensively evaluate the effectiveness and generalizability of the proposed method, we conduct experiments on **ten publicly available binary drug–target interaction (DTI) benchmarks**.
+To comprehensively evaluate the effectiveness and generalizability of the proposed method, we conduct experiments on **ten publicly available binary drug–target interaction (DTI) benchmarks**. 
 
 All datasets are curated with positive (experimentally validated) and negative (randomly sampled or experimentally determined non-interacting) pairs, and are evaluated using a 5-fold cross-validation methodology. Collectively, these benchmarks supply **14,256 unique drugs** and **68,235 distinct proteins**, generating **394,046 positive/negative interaction labels** for rigorous evaluation.
 
@@ -53,6 +53,17 @@ All datasets are curated with positive (experimentally validated) and negative (
 | **E** | 444 | 660 | 5,840 | 2,920 | 2,920 |
 | **GPCR** | 567 | 296 | 6,197 | 3,098 | 3,099 |
 | **IC** | 210 | 204 | 2,950 | 1,475 | 1,475 |
+
+### 🔗 Data Sources and Reproducibility
+
+To facilitate experimental replication, the specific sources for each dataset are listed below:
+
+1. **Davis & KIBA**: Sourced from the **Therapeutics Data Commons (TDC)** platform (https://tdcommons.ai/). We follow the standard binary classification thresholds ($pKd > 7.0$ for Davis and $score > 12.1$ for KIBA).
+2. **DrugBank**: Extracted from the official **DrugBank database (Version 5.1.8)**.
+3. **BindingDB**: Obtained from the **BindingDB database**, preprocessed using the protocol established in modern DTI benchmarks.
+4. **Human & C.elegans**: Derived from the publicly released datasets by Guo et al. (2008).
+5. **BIOSNAP**: Collected from the **Stanford BIOSNAP** collection (Chemical-Gene Interaction Networks).
+6. **E, GPCR, & IC**: Sourced from the **Yamanishi et al. (2008)** "gold standard" datasets. 
 
 ### Protein Information
 The model relies on two types of protein input files:
@@ -98,6 +109,7 @@ python mains.py
 ✉ Citation and Contact
 Please cite the corresponding work if you find this model useful in your research:
 @article{}
+
 
 
 
