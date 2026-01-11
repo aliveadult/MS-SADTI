@@ -57,12 +57,14 @@ All datasets are curated with positive (experimentally validated) and negative (
 ### 🔗 Data Sources and Reproducibility
 
 To facilitate experimental replication, the specific sources and official links for each dataset are listed below:
-1.**Davis & KIBA**: Sourced from the Therapeutics Data Commons (TDC) platform (https://tdcommons.ai/). These datasets were originally published by Davis et al. (2011) and He et al. (2017). We follow the standard binary classification thresholds ($pKd > 7.0$ for Davis and $score > 12.1$ for KIBA).
-2.**DrugBank**: Extracted from the DrugBank Online database (https://go.drugbank.com/). We utilize the curated subsets commonly used in DTI benchmarks, which contain high-confidence drug-target interaction pairs.
-3.**BindingDB**: Obtained from the BindingDB database (https://www.bindingdb.org/). This is a public database of measured binding affinities, focusing primarily on the interactions of small, drug-like molecules with proteins.
-4.**Human & C.elegans**: Derived from the publicly released datasets by Guo et al. (2008). These are balanced benchmark datasets widely used for evaluating protein-protein and drug-target interaction prediction models.
-5.**BIOSNAP**: Collected from the Stanford Network Analysis Platform (SNAP), specifically the BIOSNAP Chemical-Gene Interaction Networks (https://snap.stanford.edu/biodata/).
-6.**E, GPCR, & IC**: Sourced from the Yamanishi et al. (2008) "gold standard" datasets, available via the KEGG BRITE database (https://www.genome.jp/kegg/brite.html). These categories represent Enzymes (E), G Protein-Coupled Receptors (GPCR), and Ion Channels (IC).
+
+
+1.  **Davis & KIBA**: Sourced from the Therapeutics Data Commons (TDC) platform (https://tdcommons.ai/). These datasets were originally published by Davis et al. (2011) and He et al. (2017). We follow the standard binary classification thresholds ($pKd > 7.0$ for Davis and $score > 12.1$ for KIBA).
+2.  **DrugBank**: Extracted from the DrugBank Online database (https://go.drugbank.com/). We utilize the curated subsets commonly used in DTI benchmarks, which contain high-confidence drug-target interaction pairs.
+3.  **BindingDB**: Obtained from the BindingDB database (https://www.bindingdb.org/). This is a public database of measured binding affinities, focusing primarily on the interactions of small, drug-like molecules with proteins.
+4.  **Human & C.elegans**: Derived from the publicly released datasets by Guo et al. (2008). These are balanced benchmark datasets widely used for evaluating protein-protein and drug-target interaction prediction models.
+5.  **BIOSNAP**: Collected from the Stanford Network Analysis Platform (SNAP), specifically the BIOSNAP Chemical-Gene Interaction Networks (https://snap.stanford.edu/biodata/).
+6.  **E, GPCR, & IC**: Sourced from the Yamanishi et al. (2008) "gold standard" datasets, available via the KEGG BRITE database (https://www.genome.jp/kegg/brite.html). These categories represent Enzymes (E), G Protein-Coupled Receptors (GPCR), and Ion Channels (IC).
 
 ### Protein Information
 The model relies on two types of protein input files:
@@ -108,6 +110,7 @@ python mains.py
 ✉ Citation and Contact
 Please cite the corresponding work if you find this model useful in your research:
 @article{}
+
 
 
 
