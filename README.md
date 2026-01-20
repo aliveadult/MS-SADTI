@@ -1,9 +1,8 @@
 # MS-SADTI: Multi-Scale Structural Abstraction for Drug-Target Interaction Prediction
-<img width="2587" height="1528" alt="Visualization Transformer and Pharmacophore Hypernode" src="https://github.com/user-attachments/assets/176da699-f2d7-4ae1-b874-9793ee0bda15" />
+![FIST-DTIA Architecture](https://github.com/你的用户名/你的仓库名/raw/main/你的图片名.png)
+*Figure: The FIST-DTIA framework showcasing 1D/2D/3D feature extraction, 3D Swin Transformer structural encoding, and dual-head prediction.*
 
-
-
-## 💡 MS-SADTI Framework
+## 🧪 Scientific Framework
 MS-SADTI (Multi-Scale Structural Abstraction for Drug-Target Interaction) is an innovative drug–target interaction (DTI) prediction model designed to overcome generalization limitations and enhance interpretability through advanced feature concatenation and hierarchical structural abstraction for both drugs and proteins.
 
 The model introduces two core architectural innovations:
@@ -110,6 +109,7 @@ python mains.py
 ✉ Citation and Contact
 Please cite the corresponding work if you find this model useful in your research:
 @article{}
+
 
 
 
