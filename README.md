@@ -106,21 +106,6 @@ python mains.py
 
 ✉ Citation and Contact
 Please cite the corresponding work if you find this model useful in your research:
-@article{}
+@article{
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
