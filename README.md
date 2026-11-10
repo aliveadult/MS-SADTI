@@ -1,5 +1,5 @@
 # MS-SADTI: Multi-Scale Structural Abstraction for Drug-Target Interaction Prediction
-![Structural Framework](https://github.com/user-attachments/assets/40f9d9df-debc-4d4e-885e-67f04f3a9869)
+<img width="1406" height="832" alt="屏幕截图_10-11-2026_104236_" src="https://github.com/user-attachments/assets/1a54d9a5-3fde-4410-9bae-db9eaf6a829b" />
 
 ## 🧪 Scientific Framework
 MS-SADTI (Multi-Scale Structural Abstraction for Drug-Target Interaction) is an innovative drug–target interaction (DTI) prediction model designed to overcome generalization limitations and enhance interpretability through advanced feature concatenation and hierarchical structural abstraction for both drugs and proteins.
