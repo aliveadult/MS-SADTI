@@ -23,11 +23,11 @@ The project structure is organized around feature extraction, model definition, 
 
 | File Name | Description |
 | :--- | :--- |
-| `configss.py` | Contains all configuration parameters for the model, training, and data paths (e.g., learning rates, batch size, K-Fold splits, ESM dimensions, and clustering parameters). |
-| `utilss.py` | Utility functions for data processing, including **2D graph construction**, **3D drug/protein block clustering** (`extract_drug_graph_from_3d`, `extract_protein_graph_from_pdb` using KMeans), `HGDDTIDataset` definition, and data loading/splitting (`load_data`, `get_k_fold_data`).|
-| `models.py` | Defines the MS-SADTI model architecture (`HGDDTI`), including the sequence encoders, `StructuralEncoder` (GAT-based), and the modules for drug 2D, drug 3D, and protein structural feature extraction and final feature fusion. |
-| `mains.py` | The primary execution file, managing the K-Fold cross-validation workflow, model initialization, training/evaluation loops (`train`, `evaluate`), metric calculation, and best model saving.|
-| `evaluations.py` | Functions for calculating standard classification metrics (Acc, P, R, F1, AUC, AUPR) and statistical reporting (mean and standard deviation for K-Fold results). |
+| `config.py` | Contains all configuration parameters for the model, training, and data paths (e.g., learning rates, batch size, K-Fold splits, ESM dimensions, and clustering parameters). |
+| `util.py` | Utility functions for data processing, including **2D graph construction**, **3D drug/protein block clustering** (`extract_drug_graph_from_3d`, `extract_protein_graph_from_pdb` using KMeans), `HGDDTIDataset` definition, and data loading/splitting (`load_data`, `get_k_fold_data`).|
+| `model.py` | Defines the MS-SADTI model architecture (`HGDDTI`), including the sequence encoders, `StructuralEncoder` (GAT-based), and the modules for drug 2D, drug 3D, and protein structural feature extraction and final feature fusion. |
+| `main.py` | The primary execution file, managing the K-Fold cross-validation workflow, model initialization, training/evaluation loops (`train`, `evaluate`), metric calculation, and best model saving.|
+| `evaluation.py` | Functions for calculating standard classification metrics (Acc, P, R, F1, AUC, AUPR) and statistical reporting (mean and standard deviation for K-Fold results). |
 
 ---
 
