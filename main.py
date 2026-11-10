@@ -20,7 +20,7 @@ def ensure_dir(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
-# --- Helper function: Evaluation metric calculation (unchanged) ---
+# --- Helper function: Evaluate metric calculation (kept unchanged) ---
 
 def calculate_classification_metrics(true_labels, pred_probs, threshold=0.5):
     """Calculate binary classification metrics: Acc, P, R, F1, AUC, AUPR"""
@@ -52,13 +52,13 @@ def calculate_classification_metrics(true_labels, pred_probs, threshold=0.5):
     }
 
 
-# --- Core training and evaluation functions (Modified: adapted to 6 batch structure) ---
+# --- Core training and evaluation functions (Modified: adapt to 6-batch structure) ---
 
 def train(model, data_loader, optimizer, criterion, device):
     model.train()
     total_loss = 0
     
-    # Critical modification: receive 6 batch elements
+    # !!! Key modification: receive 6 batch elements !!!
     for drug_2d_graph_batch, drug_3d_graph_batch, protein_graph_batch, drug_seq_batch, protein_esm_batch, affinity_batch in tqdm(data_loader, desc="Training"):
         
         # Filter out empty batches where collate_fn returns None
@@ -74,7 +74,7 @@ def train(model, data_loader, optimizer, criterion, device):
         
         optimizer.zero_grad()
         
-        # Model forward call modification: pass 2 drug graph batches
+        # !!! Model forward call modification: pass 2 drug graph batches !!!
         output_logits = model(drug_2d_graph_batch, drug_3d_graph_batch, protein_graph_batch, drug_seq_batch, protein_esm_batch)
         
         loss = criterion(output_logits, affinity_batch)
@@ -93,7 +93,7 @@ def evaluate(model, data_loader, criterion, device):
     pred_probs = []
     
     with torch.no_grad():
-        # Critical modification: receive 6 batch elements
+        # !!! Key modification: receive 6 batch elements !!!
         for drug_2d_graph_batch, drug_3d_graph_batch, protein_graph_batch, drug_seq_batch, protein_esm_batch, affinity_batch in tqdm(data_loader, desc="Evaluating"):
             
             # Filter out empty batches where collate_fn returns None
@@ -107,7 +107,7 @@ def evaluate(model, data_loader, criterion, device):
             protein_esm_batch = protein_esm_batch.to(device) 
             affinity_batch = affinity_batch.to(device)
 
-            # Model forward call modification: pass 2 drug graph batches
+            # !!! Model forward call modification: pass 2 drug graph batches !!!
             output_logits = model(drug_2d_graph_batch, drug_3d_graph_batch, protein_graph_batch, drug_seq_batch, protein_esm_batch)
             
             loss = criterion(output_logits, affinity_batch)
@@ -126,7 +126,7 @@ def evaluate(model, data_loader, criterion, device):
     return metrics
 
 
-# --- Main function (unchanged) ---
+# --- Main function (kept unchanged) ---
 
 def main():
     config = Configs()
@@ -152,7 +152,7 @@ def main():
         optimizer = optim.Adam(model.parameters(), lr=config.lr, weight_decay=config.weight_decay)
         criterion = nn.BCEWithLogitsLoss() 
         
-        # Pass esm_embeddings to HGDDTIDataset
+        # HGDDTIDataset passes in esm_embeddings 
         train_dataset = HGDDTIDataset(train_df, esm_embeddings, config)
         test_dataset = HGDDTIDataset(test_df, esm_embeddings, config)
         
@@ -181,13 +181,13 @@ def main():
                   f"Acc: {test_metrics['Acc']:.4f} | F1: {test_metrics['F1']:.4f} | "
                   f"AUC: {test_metrics['AUC']:.4f} | AUPR: {test_metrics['AUPR']:.4f}")
 
-            # Save the best model based on F1 score
+            # Save best model based on F1 score
             if test_metrics['F1'] > best_f1:
                 best_f1 = test_metrics['F1']
                 best_epoch = epoch
                 torch.save(model.state_dict(), os.path.join(config.output_dir, f'best_model_fold_{fold+1}.pt'))
         
-        # Load the best model for final evaluation
+        # Load best model for final evaluation
         model.load_state_dict(torch.load(os.path.join(config.output_dir, f'best_model_fold_{fold+1}.pt')))
         final_fold_metrics = evaluate(model, test_loader, criterion, device)
         final_test_metrics.append(final_fold_metrics)
