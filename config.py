@@ -4,46 +4,43 @@ import numpy as np
 
 class Configs:
     def __init__(self):
-        # --- General Settings ---
-        # Please modify the data_path according to your actual path.
-        self.data_path = '/path/to/your/actual/data_path/dataset.csv' 
-        self.output_dir = 'output/hgddti_2d_3d_new/' # Modify output directory to distinguish
+        # --- General settings ---
+        # Please modify the data_path acc
+        self.data_path = '# Please modify the data_path acc' 
+        self.output_dir = '# Please modify the data_path acc' # Modify output directory to distinguish
         self.device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
         
-        # Memory optimization and configuration fix
+        # !!! Memory optimization and configuration fix !!!
         self.n_splits = 5             # K-Fold cross-validation folds
-        self.batch_size = 128         # Memory optimization: batch size
+        self.batch_size = 128           # Memory optimization: batch size
         self.epochs = 260             # Training epochs
-        self.lr = 1e-3                # Learning rate
+        self.lr = 1e-3               # Learning rate
         self.weight_decay = 1e-4      # Weight decay
         self.random_state = 42 
         
         # Binary classification threshold
         self.affinity_threshold = 7.0
         
-        # --- ESM Embedding Settings (New) ---
-        # Please modify the data_path according to your actual path.
-        self.esm_embedding_path = '/path/to/your/actual/data_path/DAVIS_protein_esm_embeddings.pkl'
+        # --- ESM embedding settings (new) ---
+        self.esm_embedding_path = '# Please modify the data_path acc'
         self.protein_esm_dim = 1280 
         
-        # New: Drug 3D structure parameters
-        # Please modify the data_path according to your actual path.
-        self.drug_3d_dir = '/path/to/your/actual/data_path/drug/3Ddata/' 
-        self.drug_block_size = 10       # Average number of atoms in each block
+        # !!! New: Drug 3D structure parameters !!!
+        self.drug_3d_dir = '# Please modify the data_path acc' 
+        self.drug_block_size = 10       # Average number of atoms per block
         self.max_drug_blocks = 10       # Maximum number of blocks
         
-        # New: Protein PDB file path
-        # Please modify the data_path according to your actual path.
-        self.pdb_dir = '/path/to/your/actual/data_path/3Ddata/prot_3d_for_Davis'
+        # !!! New: Protein PDB file path !!!
+        self.pdb_dir = '# Please modify the data_path acc'
+        # !!! New: Protein structure coarse-graining parameters !!!
+        self.protein_block_size = 30    # Average number of residues per block
+        self.max_protein_blocks = 15    # Maximum number of blocks (prevents large proteins from generating too many nodes)
         
-        # New: Protein structure coarse-graining parameters
-        self.protein_block_size = 30    # Average number of residues in each block
-        self.max_protein_blocks = 15    # Maximum number of blocks (prevent large proteins from generating too many nodes)
-        
-        # --- Sequence Transformer Parameters ---
+        # --- Sequence Transformer parameters ---
         self.d_model = 256          # Feature dimension
         self.nhead = 8
-        self.num_transformer_layers = 6
+        self.num_transformer_layers = 2
+        self.transformer_dropout = 0.1
         self.dropout = 0.4
         
         # Drug features
@@ -51,12 +48,12 @@ class Configs:
         self.drug_vocab_size = self.drug_fp_size      
         self.drug_seq_len = self.drug_fp_size 
         
-        # Protein features (kept for compatibility, but not actually used for encoding anymore)
+        # Protein features (kept for compatibility, but not actually used for encoding)
         self.max_protein_len = 1000
         self.protein_tokens = 'ACDEFGHIKLMNPQRSTVWYX' 
         self.protein_vocab_size = len(self.protein_tokens) + 1  
         
-        # --- Graph Structure Parameters ---
+        # --- Graph structure parameters ---
         self.num_diffusion_steps = 6 
         self.num_heads_gat = 8       
         
