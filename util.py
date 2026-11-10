@@ -29,7 +29,7 @@ try:
 except ImportError:
     pass
 
-# Define common pharmacophore SMARTS patterns
+# Define common pharmacophore SMARTS patterns (simplified example)
 PHARMACOPHORE_SMARTS = {
     'Aromatic': '[a]',
     'Donor_H': '[N,O,S;!H0]',
@@ -39,9 +39,9 @@ PHARMACOPHORE_SMARTS = {
 }
 
 
-# --- Helper function: Graph structure feature extraction (unchanged) ---
+# --- Helper functions: Graph structure feature extraction (kept unchanged) ---
 
-# RDKit standard atom feature extraction (output dimension: 10 (one-hot) + 5 (extra features) = 15D)
+# RDKit standard atom feature extraction (Output dimension: 10 (one-hot) + 5 (extra features) = 15D)
 def atom_features(atom):
     # 1. Element type (10 dimensions)
     allowable_set = ['C', 'N', 'O', 'S', 'P', 'F', 'Cl', 'Br', 'I']
@@ -55,10 +55,10 @@ def atom_features(atom):
     
     # 2. Extra atom features (5 dimensions)
     additional_features = np.array([
-        atom.GetTotalNumHs(includeNeighbors=True), # Number of Hs
+        atom.GetTotalNumHs(includeNeighbors=True), # Number of H
         atom.GetDegree(),                          # Degree
         atom.GetImplicitValence(),                 # Implicit valence
-        int(atom.GetIsAromatic()),                 # Is aromatic
+        int(atom.GetIsAromatic()),                 # Is aromatic ring
         atom.GetFormalCharge()                     # Formal charge
     ])
     
@@ -79,7 +79,7 @@ def bond_features(bond):
         bond.IsInRing()
     ]).astype(int)
 
-# --- Drug 3D structure graph coarse-graining (RDKit only) ---
+# --- !!! Drug 3D structure graph coarse-graining (RDKit only) !!! ---
 def extract_drug_graph_from_3d(drug_smiles, config):
     try:
         # 1. Create and generate 3D conformation from SMILES (RDKit only)
@@ -169,7 +169,7 @@ def extract_drug_graph_from_3d(drug_smiles, config):
         return None, None, 0
 
 
-# --- Protein structure graph coarse-graining (unchanged) ---
+# --- Protein structure graph coarse-graining (kept unchanged) ---
 def extract_protein_graph_from_pdb(pdb_file_path, esm_embeddings, protein_name, config):
     parser = PDBParser(QUIET=True)
     try:
@@ -185,14 +185,14 @@ def extract_protein_graph_from_pdb(pdb_file_path, esm_embeddings, protein_name, 
     coords = np.array([r['CA'].get_coord() for r in residues])
     n_residues = len(residues)
     
-    # 2. Get ESM embeddings (use protein_name as an approximate key)
+    # 2. Get ESM embeddings (use protein_name as approximate key)
     if protein_name not in esm_embeddings:
         esm_dim = config.protein_esm_dim
         full_esm_vec = torch.zeros((1, esm_dim), dtype=torch.float)
     else:
         full_esm_vec = torch.tensor(esm_embeddings[protein_name], dtype=torch.float) 
     
-    # Simplification: Assume the length of the ESM vector matches the number of residues, otherwise reuse the mean feature.
+    # Simplify: Assume length of ESM vectors matches number of residues, otherwise reuse mean features.
     if full_esm_vec.size(0) == n_residues:
         protein_esm_vecs = full_esm_vec 
     else:
@@ -276,7 +276,7 @@ class HGDDTIDataset(Dataset):
              
         protein_esm_vec_full = torch.tensor(self.esm_embeddings[protein_sequence_key], dtype=torch.float)
         
-        # Fix logic: ensure protein_esm_vec is always (1, 1280)
+        # !!! Fix logic: Ensure protein_esm_vec is always (1, 1280) !!!
         expected_dim = self.config.protein_esm_dim # 1280
         
         if protein_esm_vec_full.ndim > 1 and protein_esm_vec_full.size(-1) == expected_dim:
@@ -383,7 +383,7 @@ class HGDDTIDataset(Dataset):
         drug_3d_data.num_drug_block_nodes = torch.tensor([num_block_nodes_3d], dtype=torch.long)
         drug_3d_data.num_super_nodes = torch.tensor([1], dtype=torch.long) 
 
-        # --- 4. Protein structure (coarse-grained graph) (unchanged) ---
+        # --- 4. Protein structure (coarse-grained graph) (kept unchanged) ---
         pdb_file = os.path.join(self.pdb_dir, f"{protein_name}.pdb")
         if not os.path.exists(pdb_file):
             return None
@@ -422,10 +422,10 @@ class HGDDTIDataset(Dataset):
         mol_fp = AllChem.GetMorganFingerprintAsBitVect(mol, 2, nBits=self.config.drug_fp_size)
         drug_token = torch.tensor([int(bit) for bit in mol_fp.ToBitString()], dtype=torch.float)
 
-        # Return value: includes drug_2d_data, drug_3d_data, protein_struct_data, drug_token, protein_esm_vec, affinity
+        # !!! Returns: includes drug_2d_data, drug_3d_data, protein_struct_data, drug_token, protein_esm_vec, affinity
         return drug_2d_data, drug_3d_data, protein_struct_data, drug_token, protein_esm_vec, affinity
 
-# --- Data loading and K-Fold splitting functions (unchanged) ---
+# --- Data loading and K-Fold split function (kept unchanged) ---
 
 def load_data(config):
     if not os.path.exists(config.data_path):
@@ -462,7 +462,7 @@ def get_k_fold_data(df, n_splits, random_state):
 
 
 def collate_fn_combined(batch):
-    # Critical modification: adapted to 6 return elements
+    # !!! Key modification: receive 6 batch elements !!!
     batch = [item for item in batch if item is not None]
     if not batch:
         return None, None, None, None, None, None 
@@ -483,7 +483,7 @@ def collate_fn_combined(batch):
     
     affinity_batch = torch.tensor(affinity_list, dtype=torch.float).unsqueeze(1)
     
-    # Return value: 2 drug graphs, 1 protein graph, 2 sequence features, 1 label
+    # !!! Returns: 2 drug graphs, 1 protein graph, 2 sequence features, 1 label
     return drug_2d_graph_batch, drug_3d_graph_batch, protein_graph_batch, drug_seq_batch, protein_esm_batch, affinity_batch
 
 
@@ -491,9 +491,9 @@ if __name__ == '__main__':
     # Only for testing K-Fold logic
     class MockConfigs:
         def __init__(self):
-            self.data_path = 'dummy_path.csv'
-            self.esm_embedding_path = 'dummy_esm.pkl' 
-            self.pdb_dir = 'dummy_pdb_dir' 
+            self.data_path = '# Please modify the data_path acc'
+            self.esm_embedding_path = '# Please modify the data_path acc' 
+            self.pdb_dir = '# Please modify the data_path acc' 
             self.n_splits = 5
             self.random_state = 42
             self.drug_fp_size = 1024
@@ -515,12 +515,12 @@ if __name__ == '__main__':
     }
     df_test = pd.DataFrame(data)
 
-    print("--- Original data category distribution ---")
+    print("--- Original data class distribution ---")
     print(df_test['Label'].value_counts())
     
     folds = get_k_fold_data(df_test, config.n_splits, config.random_state)
     
-    print("\n--- Test set category distribution after StratifiedKFold splitting ---")
+    print("\n--- Test set class distribution after StratifiedKFold split ---")
     for i, (train_df, test_df) in enumerate(folds):
         print(f"Fold {i+1} Test Set Label Distribution (N={len(test_df)}):")
         print(test_df['Label'].value_counts(normalize=True).to_string())
