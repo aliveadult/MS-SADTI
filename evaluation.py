@@ -5,7 +5,7 @@ from sklearn.metrics import roc_auc_score, precision_recall_curve, auc
 def get_confusion_matrix_results(labels, predicts):
     labels = np.array(labels)
     predicts = np.array(predicts)
-    # Ensure predicts are binary (0 or 1)
+    # Ensure predicts is binary (0 or 1)
     
     TP = float(np.sum((labels == 1) & (predicts == 1)))
     TN = float(np.sum((labels == 0) & (predicts == 0)))
@@ -41,6 +41,6 @@ def get_curve_results(labels, predicts):
 
 # --- New function ---
 def get_mean_and_std(data_list):
-    """Calculate the mean and standard deviation of a list of data."""
+    """Calculate the mean and standard deviation of list data."""
     data = np.array(data_list)
     return np.mean(data), np.std(data)
